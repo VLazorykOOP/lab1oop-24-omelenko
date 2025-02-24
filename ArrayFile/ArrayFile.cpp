@@ -240,9 +240,32 @@ void Task1(int N, int M, int* A, int* B, int* C)
     }
 }
 
-void Task2()
+void Task2(int N, int* A, int ak, int bk)
 {
-
+    int firstPosIndex;
+    if(ak > N || bk > N)
+    {}
+    else
+    {
+        for(int i = ak; i < bk; i++)
+        {
+            if(A[i] > 0)
+            {
+                firstPosIndex = i;
+                break;
+            }
+        }
+        int max = 0;
+        int max_index;
+        for(int i = firstPosIndex; i < bk; i++)
+        {
+            if(A[i] > max)
+            {
+                max = A[i];
+                max_index = i;
+            }
+        }
+    }
 }
 
 void Task3()
@@ -304,7 +327,7 @@ int main()
     const int MAX_SIZE = 560;
     std::cout << "Hello World!\n";
     ShowMainMenu();
-    
+
     TaskV();
     return 1;
 
