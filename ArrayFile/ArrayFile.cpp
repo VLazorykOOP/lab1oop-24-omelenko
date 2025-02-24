@@ -195,11 +195,66 @@ void  TestVariant(int N, double* A, double* B, double* C) {
         C[i] = A[2 * i + 1];
     }
 }
+
+void Task1(int N, int M, int* A, int* B, int* C)
+{
+    C = (int*)malloc((N+M)*sizeof(int));
+
+    if (C == NULL) {
+        printf("Memory not allocated.\n");
+        exit(0);
+    }
+
+    int c_i = 0;
+    for(int i = 0; i < N; i++)
+    {
+        if(A[i] > 0)
+        {
+            C[c_i] = A[i];
+            c_i++;
+        }
+    }
+    for(int i = 0; i < M; i++)
+    {
+        if(B[i] > 0)
+        {
+            C[c_i] = B[i];
+            c_i++;
+        }
+    }
+    for(int i = 0; i < N; i++)
+    {
+        if(A[i] < 0)
+        {
+            C[c_i] = A[i];
+            c_i++;
+        }
+    }
+    for(int i = 0; i < M; i++)
+    {
+        if(B[i] < 0)
+        {
+            C[c_i] = B[i];
+            c_i++;
+        }
+    }
+}
+
+void Task2()
+{
+
+}
+
+void Task3()
+{
+
+}
 /*
 *  Task  Var
 * 
 * 
 */
+
 void TaskV()
 {
     char ch = '5';
@@ -209,8 +264,9 @@ void TaskV()
         ch = getchar();
         getchar();
             switch (ch) {
-             case '1': cout << " 1 "; break;
-             case '2': cout << " 2 "; break;
+             case '1': cout << '1' << endl; break;//Task1(); break;
+             case '2': cout << '2' << endl; break;//Task2(); break;
+             //case '3': Task3(); break;
             //
             case '5': return;
             }
@@ -245,33 +301,10 @@ void ArrayLocal()
 
 int main()
 { 
-    
-    
-    
     const int MAX_SIZE = 560;
     std::cout << "Hello World!\n";
     ShowMainMenu();
-    /*
-    double A[MAX_SIZE], B[MAX_SIZE],C[MAX_SIZE];
-    int n,m;
-    n = RndInputArray(MAX_SIZE, A);
-    WriteArrayTextFile(n, A, "1.txt");
-    m = ReadArrayTextFile(MAX_SIZE, B, "1.txt");
-    cout << " \n m= " << m << endl;
-    for (int i = 0; i < m; i++)
-        cout << B[i] << "   ";
-    WriteArrayBinFile(n, A, "1.bin");
-    m = ReadArrayBinFile(MAX_SIZE, C, "1.bin");
-    cout << " \n m= " << m << endl;
-    for (int i = 0; i < m; i++)
-        cout << C[i] << "   ";
-    cout << "\n  Vector \n";
-    vector<double> vA;
-    ConsoleInputVector(MAX_SIZE, vA);
-    for (auto v : vA) {
-        cout << v << "   ";
-    }
-*/
+    
     TaskV();
     return 1;
 
