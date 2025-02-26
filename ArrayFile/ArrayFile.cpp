@@ -179,26 +179,9 @@ void MenuInput()
     cout << "    5.  Exit \n";
 }
 
-
-/*
-* Задано одновимірний масив А розміру 2N. 
-* Побудувати два масиви В і С розміру N, 
-* включивши  у масив В елементи масиву А з парними індексами,
-* а у С - з непарними.
-*****************
-*  A - in 
-*  B, C - out 
-*/
-void  TestVariant(int N, double* A, double* B, double* C) {
-    for (int i = 0; i < N; i++) {
-        B[i] = A[2 * i];
-        C[i] = A[2 * i + 1];
-    }
-}
-
-void Task1(int N, int M, int* A, int* B, int* C)
+void Task1(int N, int M, int* A, int* B)
 {
-    C = (int*)malloc((N+M)*sizeof(int));
+    int* C =  new int[N+M];//(int*)malloc((N+M)*sizeof(int));
 
     if (C == NULL) {
         printf("Memory not allocated.\n");
@@ -238,6 +221,12 @@ void Task1(int N, int M, int* A, int* B, int* C)
             c_i++;
         }
     }
+
+    for (int i = 0; i < N; i++)
+    {
+        cout << C[i] << " ";
+    }
+    cout << endl;
 }
 
 void Task2(int N, int* A, int ak, int bk)
@@ -256,7 +245,7 @@ void Task2(int N, int* A, int ak, int bk)
             }
         }
         int max = 0;
-        int max_index;
+        int max_index = 0;
         for(int i = firstPosIndex; i < bk; i++)
         {
             if(A[i] > max)
@@ -265,13 +254,31 @@ void Task2(int N, int* A, int ak, int bk)
                 max_index = i;
             }
         }
+        cout << "Max element index: ";
+        cout << max_index;
+        cout << " Max element: ";
+        cout << max << endl;
     }
 }
 
-void Task3()
+void Task3(int k, int N, int* A, int* A1)
 {
-
+    if (N < 200)
+    {
+        int A1_i = 0;
+        for (int i = N - k; i < N; i++)
+        {
+            A1[A1_i] = A[i];
+            A1_i++;
+        }
+        for (int i = 0; i < N - k; i++)
+        {
+            A1[A1_i] = A[i];
+            A1_i++;
+        }
+    }
 }
+
 /*
 *  Task  Var
 * 
@@ -324,22 +331,29 @@ void ArrayLocal()
 
 int main()
 { 
-    const int MAX_SIZE = 560;
-    std::cout << "Hello World!\n";
-    ShowMainMenu();
+    int N = 5;
+    int k = 2;
+    int* A = new int[N];
+    int* A1 = new int[N];
 
-    TaskV();
-    return 1;
+    cout << "Array: \n";
+    for(int i = 0; i < N; i++)
+    {
+        A[i] = i+1;
+    }
+    cout<<endl;
 
+    cout << "Moved Array: \n";
+    for(int i = 0; i < N; i++)
+    {
+        A1[i] = i+1;
+    }
+    cout<<endl;
+    
+    Task3(k, N, A, A1);
+
+    for(int i = 0; i < N; i++)
+    {
+        cout << A1[i] << " ";
+    }
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
