@@ -11,10 +11,8 @@
 using namespace std;
 
 typedef double* pDouble;
-/*
-*   ConsoleInputArrayDouble
-*   
-*/
+const int MAX_SIZE = 20;
+
 int ConsoleInputSizeArray(const int sizeMax)
 {
     int size = 0; 
@@ -24,10 +22,15 @@ int ConsoleInputSizeArray(const int sizeMax)
     } while (size <= 0 || size >= sizeMax);
     return size;
 }
-/*
-*   ConsoleInputArrayDouble
-*
-*/
+
+int ConsoleInputNumber(int size)
+{
+    int num = 0;
+    cout << "Input number less than/equal to " << size <<endl;
+    cin >> num;
+    return num;
+}
+
 int ConsoleInputArray(int sizeMax, double A[])
 {
     int size = ConsoleInputSizeArray(sizeMax);
@@ -37,10 +40,14 @@ int ConsoleInputArray(int sizeMax, double A[])
     return size;
 }
 
-/*
-*   RndInputArrayDouble
-*
-*/
+void ConsoleInputArrayAlt(int size, double A[])
+{
+    for (int i = 0; i < size; i++) 
+    {
+        cout << " Array[ " << i << "] "; cin >> A[i];
+    }
+}
+
 int RndInputArray(int sizeMax, double A[])
 {
     int size = ConsoleInputSizeArray(sizeMax);
@@ -89,12 +96,6 @@ void ConsoleInputVector(int sizeMax, vector<double> &A)
     return ;
 }
 
-
-/*
-*  WriteArrayTextFile 
-*
-*/
-
 void WriteArrayTextFile(int n, double *arr, const char *fileName )
 {
     ofstream fout(fileName);
@@ -104,10 +105,6 @@ void WriteArrayTextFile(int n, double *arr, const char *fileName )
         fout << arr[i] << "   ";
     fout.close(); //
 }
-/*
-*  ReadArrayTextFile
-*
-*/
 
 
 int ReadArrayTextFile(int n, double* arr, const char* fileName)
@@ -124,7 +121,6 @@ int ReadArrayTextFile(int n, double* arr, const char* fileName)
     return size;
     
 }
-
 
 void WriteArrayBinFile(int n, double* arr, const char* fileName)
 {
@@ -162,11 +158,9 @@ void ShowMainMenu()
 void MenuTask()
 {
     cout << "     Menu Task   \n";
-    cout << "    1.  Local array  \n";
-    cout << "    2.  Dynamic array 1 \n";
-    cout << "    3.  Dynamic array 2  new \n"; 
-    cout << "    4.  Dynamic array : vector \n";
-    cout << "    5.  Exit \n";
+    cout << "    1.  Task 1  \n";
+    cout << "    2.  Task 2 \n";
+    cout << "    3.  Task 3 \n"; 
 }
 
 void MenuInput()
@@ -179,9 +173,17 @@ void MenuInput()
     cout << "    5.  Exit \n";
 }
 
-void Task1(int N, int M, int* A, int* B)
+void Task1()
 {
-    int* C =  new int[N+M];//(int*)malloc((N+M)*sizeof(int));
+    cout << "\n\nTask1\n\n";
+
+    int N = ConsoleInputSizeArray(MAX_SIZE);
+    int M = ConsoleInputSizeArray(MAX_SIZE);
+    double* A = new double[N];
+    double* B = new double[M];
+    ConsoleInputArrayAlt(N, A);
+    ConsoleInputArrayAlt(M, B);
+    double* C =  new double[N+M];
 
     if (C == NULL) {
         printf("Memory not allocated.\n");
@@ -222,17 +224,29 @@ void Task1(int N, int M, int* A, int* B)
         }
     }
 
+    cout << "Created array: " << endl;
     for (int i = 0; i < N; i++)
     {
         cout << C[i] << " ";
     }
     cout << endl;
+
+    delete[] A;
+    delete[] B;
 }
 
-void Task2(int N, int* A, int ak, int bk)
+void Task2()
 {
+    cout << "\n\nTask2\n\n";
+
+    int N = ConsoleInputSizeArray(MAX_SIZE);
+    int ak = ConsoleInputNumber(N);
+    int bk = ConsoleInputNumber(N);
+    double* A = new double[N];
+    ConsoleInputArrayAlt(N, A);
+
     int firstPosIndex;
-    if(ak > N || bk > N)
+    if(ak > N || bk > N || ak > bk)
     {}
     else
     {
@@ -246,7 +260,7 @@ void Task2(int N, int* A, int ak, int bk)
         }
         int max = 0;
         int max_index = 0;
-        for(int i = firstPosIndex; i < bk; i++)
+        for(int i = firstPosIndex+1; i < bk; i++)
         {
             if(A[i] > max)
             {
@@ -254,15 +268,25 @@ void Task2(int N, int* A, int ak, int bk)
                 max_index = i;
             }
         }
-        cout << "Max element index: ";
-        cout << max_index;
-        cout << " Max element: ";
-        cout << max << endl;
+        cout << "Max element index: " << max_index << endl;
+        cout << "Max element: " << max << endl;
     }
+    delete[] A;
 }
 
-void Task3(int k, int N, int* A, int* A1)
+void Task3()
 {
+    cout << "\n\nTask3\n\n";
+
+    int N = ConsoleInputSizeArray(MAX_SIZE);
+    int k = ConsoleInputNumber(N);
+    double* A  = new double[N];
+    ConsoleInputArrayAlt(N, A);
+    double* A1 = new double[N];
+    for(int i = 0; i < N; i++)
+    {
+        A1[i] = 0;
+    }
     if (N < 200)
     {
         int A1_i = 0;
@@ -277,13 +301,23 @@ void Task3(int k, int N, int* A, int* A1)
             A1_i++;
         }
     }
-}
+    cout << "Original array: "<<endl;
+    for(int i = 0; i < N; i++)
+    {
+        cout << A[i] << " ";
+    }
+    cout<<endl;
+    
+    cout << "Array moved by " << k << " points" <<endl;
+    for(int i = 0; i < N; i++)
+    {
+        cout << A1[i] << " ";
+    }
+    cout<<endl;
 
-/*
-*  Task  Var
-* 
-* 
-*/
+    delete[] A;
+    delete[] A1;
+}
 
 void TaskV()
 {
@@ -294,9 +328,9 @@ void TaskV()
         ch = getchar();
         getchar();
             switch (ch) {
-             case '1': cout << '1' << endl; break;//Task1(); break;
-             case '2': cout << '2' << endl; break;//Task2(); break;
-             //case '3': Task3(); break;
+             case '1': Task1(); break;//Task1(); break;
+             case '2': Task2(); break;//Task2(); break;
+             case '3': Task3(); break;
             //
             case '5': return;
             }
@@ -331,29 +365,6 @@ void ArrayLocal()
 
 int main()
 { 
-    int N = 5;
-    int k = 2;
-    int* A = new int[N];
-    int* A1 = new int[N];
-
-    cout << "Array: \n";
-    for(int i = 0; i < N; i++)
-    {
-        A[i] = i+1;
-    }
-    cout<<endl;
-
-    cout << "Moved Array: \n";
-    for(int i = 0; i < N; i++)
-    {
-        A1[i] = i+1;
-    }
-    cout<<endl;
-    
-    Task3(k, N, A, A1);
-
-    for(int i = 0; i < N; i++)
-    {
-        cout << A1[i] << " ";
-    }
+    TaskV();
+    return 0;
 }
