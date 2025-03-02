@@ -13,13 +13,24 @@ using namespace std;
 typedef double* pDouble;
 const int MAX_SIZE = 20;
 
+void clearConsole()
+{
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
 int ConsoleInputSizeArray(const int sizeMax)
 {
     int size = 0; 
-    do {
-        cout << " Input size Array ( 0< 1 < " << sizeMax << " ) ";
+    while (size <= 0 || size >= sizeMax)
+    {
+        cout << "Input size Array ( 0 < 1 < " << sizeMax << " ): ";
         cin >> size;
-    } while (size <= 0 || size >= sizeMax);
+        cout << endl;
+    }
     return size;
 }
 
@@ -106,7 +117,6 @@ void WriteArrayTextFile(int n, double *arr, const char *fileName )
     fout.close(); //
 }
 
-
 int ReadArrayTextFile(int n, double* arr, const char* fileName)
 {
     int size;
@@ -186,50 +196,53 @@ void Task1()
     double* C =  new double[N+M];
 
     if (C == NULL) {
-        printf("Memory not allocated.\n");
+        cout << "Memory not allocated.\n";
         exit(0);
     }
+    else
+    {
 
-    int c_i = 0;
-    for(int i = 0; i < N; i++)
-    {
-        if(A[i] > 0)
+        int c_i = 0;
+        for(int i = 0; i < N; i++)
         {
-            C[c_i] = A[i];
-            c_i++;
+            if(A[i] > 0)
+            {
+                C[c_i] = A[i];
+                c_i++;
+            }
         }
-    }
-    for(int i = 0; i < M; i++)
-    {
-        if(B[i] > 0)
+        for(int i = 0; i < M; i++)
         {
-            C[c_i] = B[i];
-            c_i++;
+            if(B[i] > 0)
+            {
+                C[c_i] = B[i];
+                c_i++;
+            }
         }
-    }
-    for(int i = 0; i < N; i++)
-    {
-        if(A[i] < 0)
+        for(int i = 0; i < N; i++)
         {
-            C[c_i] = A[i];
-            c_i++;
+            if(A[i] < 0)
+            {
+                C[c_i] = A[i];
+                c_i++;
+            }
         }
-    }
-    for(int i = 0; i < M; i++)
-    {
-        if(B[i] < 0)
+        for(int i = 0; i < M; i++)
         {
-            C[c_i] = B[i];
-            c_i++;
+            if(B[i] < 0)
+            {
+                C[c_i] = B[i];
+                c_i++;
+            }
         }
+    
+        cout << "Created array: " << endl;
+        for (int i = 0; i < N; i++)
+        {
+            cout << C[i] << " ";
+        }
+        cout << endl;
     }
-
-    cout << "Created array: " << endl;
-    for (int i = 0; i < N; i++)
-    {
-        cout << C[i] << " ";
-    }
-    cout << endl;
 
     delete[] A;
     delete[] B;
@@ -323,7 +336,8 @@ void TaskV()
 {
     char ch = '5';
     do {
-        system("cls");
+        //system("cls");
+        clearConsole();
         MenuTask();
         ch = getchar();
         getchar();
@@ -346,7 +360,8 @@ void ArrayLocal()
     int n;
     char ch = '5';
     do {
-        system("cls");
+        //system("cls");
+        clearConsole();
         MenuTask();
         ch = getchar();
         getchar();
@@ -368,3 +383,4 @@ int main()
     TaskV();
     return 0;
 }
+
