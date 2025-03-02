@@ -237,7 +237,7 @@ void Task1()
         }
     
         cout << "Created array: " << endl;
-        for (int i = 0; i < N; i++)
+        for (int i = 0; i < (N+M); i++)
         {
             cout << C[i] << " ";
         }
@@ -246,6 +246,7 @@ void Task1()
 
     delete[] A;
     delete[] B;
+    delete[] C;
 }
 
 void Task2()
@@ -334,24 +335,25 @@ void Task3()
 
 void TaskV()
 {
-    char ch = '5';
-    do {
-        //system("cls");
-        clearConsole();
-        MenuTask();
-        ch = getchar();
-        getchar();
-            switch (ch) {
-             case '1': Task1(); break;//Task1(); break;
-             case '2': Task2(); break;//Task2(); break;
-             case '3': Task3(); break;
-            //
-            case '5': return;
-            }
-        cout << " Press any key and enter\n";
-        ch = getchar();
-        } while (ch != 27);
     
+    char ch = '0';
+    char ch1 = 'N';
+    MenuTask();
+    cout << "Choose a task(5 to exit): \n";
+    cin >> ch;
+        switch (ch) {
+         case '1': Task1(); break;
+         case '2': Task2(); break;
+         case '3': Task3(); break;
+         case '0': return; break;
+        }
+    cout << "Continue?(Y/N): \n";
+    cin >> ch1;
+        switch(ch1)
+        {
+            case 'Y': clearConsole(); TaskV(); break;
+            case 'N': return; break;
+        }
 }
 
 void ArrayLocal()
